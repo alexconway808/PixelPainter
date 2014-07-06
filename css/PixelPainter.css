@@ -1,0 +1,31 @@
+
+/*#swatch {
+  border:5px solid black;
+    }*/
+
+#controlrows {
+  height: 60px;
+}
+
+#artboard {
+  float:right;
+  margin-right: 518px; 
+}
+
+td {
+  width: 60px;
+  height: 60px;
+  border: solid 2px black;
+}
+
+#red {
+  background: red;
+}
+
+#white {
+  background: white;
+}
+
+#blue {
+  background: blue;
+}
