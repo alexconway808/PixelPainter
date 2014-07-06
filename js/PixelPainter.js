@@ -2,15 +2,21 @@
 // that will accept 2 arguments, width and height
 // pixelPainter will return itself
 
+$( document ).ready(function() {
+  console.log( "ready!" );
+  PixelPainter(10,10);
+  PixelPainter(5,5);
+});
+
 
 function PixelPainter (width, height){
 var gridHtml = "";
 var controls = $("#controls");
-  gridHtml += '<table border = "1" cellspacing = "1" cellpadding = "1">';
-  for (i = 0; i < 10; i++){
+  gridHtml += '<table>';
+  for (i = 0; i < width; i++){
     gridHtml += '<tr>';
-    for (j = 0; j < 10; j++){
-      gridHtml += '<td>' + (i + j) + '</td>';
+    for (j = 0; j < height; j++){
+      gridHtml += '<td class = "cell"></td>';
     }
     gridHtml += '</tr>';
   }
@@ -19,10 +25,6 @@ var controls = $("#controls");
 }
 
 
-$( document ).ready(function() {
-  console.log( "ready!" );
-  PixelPainter(10,10);
-});
 
 
 // var controls = $("td");

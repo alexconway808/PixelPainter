@@ -29,3 +29,7 @@ td {
 #blue {
   background: blue;
 }
+
+.cell {
+  border-radius: 10px;
+}
