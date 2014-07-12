@@ -1,12 +1,5 @@
 
-// Code included inside $( document ).ready() will 
-//only run once the page Document Object Model (DOM) is 
-//ready for JavaScript code to execute.
-
-// $( document ).ready(function() {
-  //console.log( "ready!" );
-
-function PixelPainter (){
+function PixelPainter (width, height){
   this.artboard = $('<div id="pixelPainter_artboard"></div>');
   this.controls = $('<div id="pixelPainter_controls"></div>');
   var colors = ['#DC143C', '#FF3E96', '#DA70D6', '#EE82EE', '#9400D3', '#4B0082', '#9B30FF', 
@@ -32,9 +25,9 @@ function PixelPainter (){
 
 
   var Canvas = $('<table id="Canvas"></table>');
-    for (var k = 0; k <= 10; k++) {
+    for (var k = 0; k < width; k++) {
       var canvasRow = $('<tr/>'); 
-      for (var l = 0; l <= 10; l++) {
+      for (var l = 0; l < height; l++) {
         $(canvasRow).append('<td></td>');
       };
     $(Canvas).append(canvasRow);
@@ -71,7 +64,7 @@ function PixelPainter (){
 }
 
 $( document ).ready(function() {
-  var p = PixelPainter();
+  var p = PixelPainter(10,10);
   $("#controls").append(p.controls);
   $("#artboard").append(p.artboard);
 });
