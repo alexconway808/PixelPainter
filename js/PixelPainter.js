@@ -3,70 +3,77 @@
 //only run once the page Document Object Model (DOM) is 
 //ready for JavaScript code to execute.
 
-$( document ).ready(function() {
+// $( document ).ready(function() {
   //console.log( "ready!" );
 
+function PixelPainter (){
+  this.artboard = $('<div id="pixelPainter_artboard"></div>');
+  this.controls = $('<div id="pixelPainter_controls"></div>');
+  var colors = ['#DC143C', '#FF3E96', '#DA70D6', '#EE82EE', '#9400D3', '#4B0082', '#9B30FF', 
+  '#000080', '#6495ED', '#63B8FF', '#87CEFF', '#98F5FF', '#00C78C', '#43CD80', '#228B22', 
+  '#C0FF3E', '#FFD700', '#FFA500','#CD6600', '#A0522D', '#FF4500', '#FF6347', '#FF4040', 
+  '#1E1E1E', '#FFFFFF'] //this var holds the colors in controls table
 
-var colors = ['#DC143C', '#FF3E96', '#DA70D6', '#EE82EE', '#9400D3', '#4B0082', '#9B30FF', 
-'#000080', '#6495ED', '#63B8FF', '#87CEFF', '#98F5FF', '#00C78C', '#43CD80', '#228B22', 
-'#C0FF3E', '#FFD700', '#FFA500','#CD6600', '#A0522D', '#FF4500', '#FF6347', '#FF4040', 
-'#1E1E1E', '#FFFFFF'] //this var holds the colors in controls table
 
-
-var hold = 0;
-var table = $('<table></table>');
-  for (var i = 0; i < 5; i++) {
-    var tableRow = $('<tr></tr>');
-    for (var j = 0; j < 5; j++)  {
-      var tableData = $('<td></td>');
-      $(tableRow).append(tableData);
-      tableData.css({'background-color': colors[hold]});
-      hold++;
+  var hold = 0;
+  var table = $('<table></table>');
+    for (var i = 0; i < 5; i++) {
+      var tableRow = $('<tr></tr>');
+      for (var j = 0; j < 5; j++)  {
+        var tableData = $('<td></td>');
+        $(tableRow).append(tableData);
+        tableData.css({'background-color': colors[hold]});
+        hold++;
+      };
+    $(table).append(tableRow);
     };
-  $(table).append(tableRow);
-  };
-  $('#controls').append(table);
+    this.controls.append(table);
 
 
-var artboard = $('#artboard');  
-var Canvas = $('<table id="Canvas"></table>');
-  for (var k = 0; k <= 10; k++) {
-    var canvasRow = $('<tr/>'); 
-    for (var l = 0; l <= 10; l++) {
-      $(canvasRow).append('<td></td>');
+
+  var Canvas = $('<table id="Canvas"></table>');
+    for (var k = 0; k <= 10; k++) {
+      var canvasRow = $('<tr/>'); 
+      for (var l = 0; l <= 10; l++) {
+        $(canvasRow).append('<td></td>');
+      };
+    $(Canvas).append(canvasRow);
     };
-  $(Canvas).append(canvasRow);
-  };
-  $('#artboard').append(Canvas);
+    this.artboard.append(Canvas);
 
 
-var captureColor;
-$('#controls td').on("click", function() {
-  captureColor = $(this).css("background-color");
-  });  
-  
+  var captureColor;
+  this.controls.find("td").on("click", function() {
+    captureColor = $(this).css("background-color");
+    });  
+    
 
-var placeColor;
-$('#artboard td').on("click", function() {
-  placeColor = $(this).css("background-color", captureColor);
-});
-
-
-var clearButton = $('<button id="clear">clear</button>');
-$('#controls').append(clearButton);
-  $(clearButton).on("click", function() {
-    $('#artboard td').css('background-color', '#FFFFFF');
-});
+  var placeColor;
+  this.artboard.find("td").on("click", function() {
+    placeColor = $(this).css("background-color", captureColor);
+  });
 
 
-var eraseButton = $('<button id="erase">erase</button>');
-$('#controls').append(eraseButton);
-  $(eraseButton).on("click", function() {
-    $(this).css("background-color", "white");
-      captureColor = "#FFFFFF";
-});
+  var clearButton = $('<button id="clear">clear</button>');
+  this.controls.append(clearButton);
+    $(clearButton).on("click", function() {
+      artboard.find("td").css('background-color', '#FFFFFF');
+  });
 
 
+  var eraseButton = $('<button id="erase">erase</button>');
+  this.controls.append(eraseButton);
+    $(eraseButton).on("click", function() {
+      $(this).css("background-color", "white");
+        captureColor = "#FFFFFF";
+  });
+    return this;
+}
+
+$( document ).ready(function() {
+  var p = PixelPainter();
+  $("#controls").append(p.controls);
+  $("#artboard").append(p.artboard);
 });
 
 
